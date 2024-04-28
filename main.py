@@ -49,7 +49,7 @@ L = solver.lower_triangle() #maciesz dolna trójkątna
 # print("Time: ", execution_time)
 
 start_time = time.perf_counter()
-iterations, x_solution = other_functions.solve_gauss_seidel(A, b,tolerance=1e-9)
+iterations, x_solution = other_functions.solve_gauss_seidel(A, b, tolerance=1e-9)
 end_time = time.perf_counter()
 execution_time = end_time - start_time
 #x_solution.print()
