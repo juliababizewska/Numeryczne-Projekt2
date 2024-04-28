@@ -5,8 +5,8 @@ import other_functions
 import time
 
 indeks = 193206
-#N = 906
-N = 10
+N = 906
+#N = 10
 A = Matrix(N,N)
 e = 2
 f = 3
@@ -37,16 +37,16 @@ L = solver.lower_triangle() #maciesz dolna trójkątna
 #D * M = -(L+U)
 
 
-# M = other_functions.calculate_M_jacobi(D, L, U)
-# bm = other_functions.calculate_bm_jacobi(D, b)
-# start_time = time.perf_counter()
-# iterations, x_solution = other_functions.solve_jacobi(A, b, bm, M,  tolerance=1e-9)
-# end_time = time.perf_counter()
-# execution_time = end_time - start_time
+M = other_functions.calculate_M_jacobi(D, L, U)
+bm = other_functions.calculate_bm_jacobi(D, b)
+start_time = time.perf_counter()
+iterations, x_solution = other_functions.solve_jacobi(A, b, bm, M,  tolerance=1e-9)
+end_time = time.perf_counter()
+execution_time = end_time - start_time
 
-# x_solution.print()
-# print("Iterations: ", iterations)
-# print("Time: ", execution_time)
+x_solution.print()
+print("Iterations: ", iterations)
+print("Time: ", execution_time)
 
 start_time = time.perf_counter()
 iterations, x_solution = other_functions.solve_gauss_seidel(A, b, tolerance=1e-9)

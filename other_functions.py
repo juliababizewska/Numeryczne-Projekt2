@@ -2,6 +2,8 @@ import math
 
 from matrix import Matrix
 from time import sleep
+import matplotlib.pyplot as plt
+
 
 
 def invert_matrix(D):
@@ -98,6 +100,7 @@ def solve_jacobi(A, b, bm, M, tolerance=1e-9):
         # residual.print()
         err_norm = norm_euclidian(residual)
         print(err_norm)
+        error.append(err_norm)
 
         # Sprawdź warunek zbieżności
         if err_norm < tolerance:
@@ -108,14 +111,32 @@ def solve_jacobi(A, b, bm, M, tolerance=1e-9):
         x = new_x
         iterations += 1
 
+        # Plot the error norm at each iteration
 
+    iterations_array = [x for x in range(1,iterations+1)]
+    error.pop()
+    print(len(iterations_array))
+    print(len(error))
+    plt.figure()
+    plt.plot(iterations_array, error)
+    plt.xlabel('Iteration')
+    plt.ylabel('Error Norm')
+    plt.title('Error Norm over Iterations - Jacobi')
+
+    # Set the x-axis range to the range from 0 to the total number of iterations
+    plt.xlim(0, iterations)
+
+    # Set the y-axis range from the minimum to maximum error norm values
+    plt.ylim(min(error), max(error))
+
+    plt.show()
     return iterations, x
 
 
 def solve_gauss_seidel(A, b, tolerance=1e-9):
     N = len(A.matrix)
     x = Matrix(N, 1)
-
+    error  = []
     # Zainicjuj wektor x zerami
     for i in range(N):
         x.set_element(0, i, 0)
@@ -145,11 +166,29 @@ def solve_gauss_seidel(A, b, tolerance=1e-9):
 
         # Oblicz normę błędu
         err_norm = err_norm ** 0.5
-
+        error.append(err_norm)
         # Sprawdź warunek zbieżności
         if err_norm < tolerance:
             break
 
         iterations += 1
+
+    iterations_array = [x for x in range(1,iterations+1)]
+    error.pop()
+    print(len(iterations_array))
+    print(len(error))
+    plt.figure()
+    plt.plot(iterations_array, error)
+    plt.xlabel('Iteration')
+    plt.ylabel('Error Norm')
+    plt.title('Error Norm over Iterations - Gauss')
+
+    # Set the x-axis range to the range from 0 to the total number of iterations
+    plt.xlim(0, iterations)
+
+    # Set the y-axis range from the minimum to maximum error norm values
+    plt.ylim(min(error), max(error))
+
+    plt.show()
 
     return iterations, x
